@@ -2,20 +2,16 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        if (x < 0) return false;
+        if (x < 0 || (x % 10 == 0 && x != 0))
+            return false;
 
-        int div = 1;
-        while (x / div >= 10)
-            div *= 10;
+        int rev = 0;
 
-        while (x > 0) {
-            if (x / div != x % 10)
-                return false;
-
-            x = (x % div) / 10;
-            div /= 100;
+        while (x > rev) {
+            rev = rev * 10 + x % 10;
+            x /= 10;
         }
 
-        return true;
+        return x == rev || x == rev / 10;
     }
 };
